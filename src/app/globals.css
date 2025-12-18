@@ -1,26 +1,28 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =========================
+   DESIGN TOKENS
+   ========================= */
+
+@theme {
+  /* Brand */
+  --color-primary: #1b4b66;
+  --color-primary-tint: #639599;
+
+  --color-secondary: #f97316;
+  --color-secondary-foreground: #ffffff;
+  --color-error: #b00020;
+  --color-highlight: #ff8c4b;
+  --color--bright: #ffffff;
+  --color-light0text: #b6b6b6;
+  --color-dark: #13101e;
+  --color-accent: #f4f4f4;
+  --color-grey: #f1f1f1;
+  --color-low-emphasis: #626262;
+  --color-high-emphasis: #171520;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.global-container {
+  max-width: 1280px;
+  margin-inline: auto;
 }
