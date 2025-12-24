@@ -1,10 +1,20 @@
-import Image from "next/image";
+import Hero from "@/components/home/Hero";
+import NewArrivalsSection from "@/components/home/NewArrivalsSection";
+import HandPickedSection from "@/components/home/HandPickedSection";
+import ShopByBrandsSection from "@/components/home/SopByBrandsSection";
+import HandpickedListItems from "@/components/home/HandpickedListItems";
 
-import SearchBar from "@/components/global/SearchBar";
 export default function Home() {
   return (
     <>
-      <main className="max-w-7xl mx-auto px-5"></main>
+      <main className="">
+        <Hero />
+        <NewArrivalsSection />
+        <HandPickedSection>
+          <HandpickedListItems />
+        </HandPickedSection>
+        <ShopByBrandsSection />
+      </main>
     </>
   );
 }

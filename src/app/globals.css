@@ -1,19 +1,28 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 /* =========================
    DESIGN TOKENS
    ========================= */
 
 @theme {
-  /* Brand */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  /* Brand Colors */
   --color-primary: #1b4b66;
   --color-primary-tint: #639599;
-
   --color-secondary: #f97316;
   --color-secondary-foreground: #ffffff;
   --color-error: #b00020;
   --color-highlight: #ff8c4b;
-  --color--bright: #ffffff;
+  --color-bright: #ffffff;
   --color-light0text: #b6b6b6;
   --color-dark: #13101e;
   --color-accent: #f4f4f4;
@@ -21,8 +30,95 @@
   --color-low-emphasis: #626262;
   --color-high-emphasis: #171520;
 }
+/* 
+* {
+  border: red 1px solid !important;
+} */
 
 .global-container {
   max-width: 1280px;
   margin-inline: auto;
+  padding-inline: 0.8rem;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Shadcn overrides with your brand colors */
+  --background: #ffffff;
+  --foreground: #171520;
+  --card: #ffffff;
+  --card-foreground: #171520;
+  --popover: #ffffff;
+  --popover-foreground: #171520;
+  --primary: #1b4b66;
+  --primary-foreground: #ffffff;
+  --secondary: #f97316;
+  --secondary-foreground: #ffffff;
+  --muted: #f1f1f1;
+  --muted-foreground: #626262;
+  --accent: #f97316;
+  --accent-foreground: #ffffff;
+  --destructive: #b00020;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #1b4b66;
+  --chart-1: #1b4b66;
+  --chart-2: #f97316;
+  --chart-3: #639599;
+  --chart-4: #ff8c4b;
+  --chart-5: #b6b6b6;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #171520;
+  --sidebar-primary: #1b4b66;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f97316;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #1b4b66;
+}
+
+.dark {
+  --background: #13101e;
+  --foreground: #ffffff;
+  --card: #1a1625;
+  --card-foreground: #ffffff;
+  --popover: #1a1625;
+  --popover-foreground: #ffffff;
+  --primary: #639599;
+  --primary-foreground: #13101e;
+  --secondary: #ff8c4b;
+  --secondary-foreground: #13101e;
+  --muted: #2d2838;
+  --muted-foreground: #b6b6b6;
+  --accent: #ff8c4b;
+  --accent-foreground: #13101e;
+  --destructive: #ff6b6b;
+  --border: #2d2838;
+  --input: #2d2838;
+  --ring: #639599;
+  --chart-1: #639599;
+  --chart-2: #ff8c4b;
+  --chart-3: #f97316;
+  --chart-4: #1b4b66;
+  --chart-5: #b6b6b6;
+  --sidebar: #1a1625;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #639599;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ff8c4b;
+  --sidebar-accent-foreground: #13101e;
+  --sidebar-border: #2d2838;
+  --sidebar-ring: #639599;
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+    outline-color: hsl(var(--ring) / 0.5);
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
 }
