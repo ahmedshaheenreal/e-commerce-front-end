@@ -5,3 +5,5 @@ export const categories = [
   { id: 10, name: "Jewellery", image: "/sun-glasses.jpg" },
   { id: 11, name: "Apparels", image: "/personal-care.png" },
 ];
+
+export const BASE_API_URL = "http://localhost:8000/api";

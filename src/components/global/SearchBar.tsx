@@ -10,8 +10,6 @@ export default function SearchBar() {
 
     const response = await fetch(`http://localhost:8000/api/search/${query}`);
     const data = await response.json();
-    console.log("Search results:", data);
-    console.log("Search query:", query);
   };
 
   return (
@@ -32,7 +30,7 @@ export default function SearchBar() {
           outline-none
           border-none
           bg-grey
-          py-2
+         
           pl-10
           pr-1
           text-text-primary

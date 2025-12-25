@@ -1,32 +1,31 @@
-import BreadCumber from "@/components/global/BreadCumber";
 import Productlist from "@/components/global/Productlist";
-
+import BreadCumber from "@/components/global/BreadCumber";
 type PageProps = {
-  params: Promise<{ name: string }>;
-  searchParams: Promise<{ page?: string }>;
+  params: Promise<{ name: number }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 async function page({ params, searchParams }: PageProps) {
   const { name } = await params;
   const { page } = await searchParams;
 
-  const path = `/category/${Number(name) || name.toLowerCase()}`;
-  const apiPath = `/products/${name}`;
+  const path = `/category/handpicked/${Number(name) || name}`;
+  const apiPath = `/${Number(name) || name}/handpicked`;
+
   return (
     <>
       <div>
         <h3 className="text-[34px] font-semibold text-primary py-2">
-          {name.charAt(0).toUpperCase() + name.slice(1)}
+          Handpicked
         </h3>
       </div>
       <div>
-        <BreadCumber name={name} />
+        <BreadCumber name={"Handpicked"} />
       </div>
       <div>
-        <Productlist path={path} apiPath={apiPath} />
+        <Productlist apiPath={apiPath} path={path} />
       </div>
     </>
   );
 }
-
 export default page;

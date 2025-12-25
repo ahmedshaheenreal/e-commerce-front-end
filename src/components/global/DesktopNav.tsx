@@ -12,7 +12,7 @@ export default function DesktopNav() {
   ];
 
   return (
-    <div className="flex items-center justify-start gap-20 py-4 px-5 global-container border-b-2 border-grey mb-4">
+    <div className="flex items-center justify-between  py-5.5 px-5 global-container w-full mb-4">
       <div className="flex gap-5 items-center">
         <div className="logo w-28">
           <Link href={"/"}>
@@ -28,7 +28,7 @@ export default function DesktopNav() {
           ))}
         </nav>
       </div>
-      <div className="flex justify-end gap-5">
+      <div className="flex justify-end gap-5 basis-1/3 ">
         <div className="grow">
           <SearchBar />
         </div>

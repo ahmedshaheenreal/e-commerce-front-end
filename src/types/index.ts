@@ -1,3 +1,3 @@
-import { ProductCardProps } from "./product";
+import { ProductCardProps, Product } from "./product";
 
-export type { ProductCardProps };
+export type { ProductCardProps, Product };

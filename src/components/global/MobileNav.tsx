@@ -38,7 +38,11 @@ export default function MobileNav() {
         >
           <nav className="flex flex-col gap-4 text-sm font-medium text-primary">
             {categories.map((c, i) => (
-              <Link href={`/category/${c}`} key={i}>
+              <Link
+                href={`/category/${c}`}
+                key={i}
+                onClick={() => setIsMenuOpen(false)}
+              >
                 {c}
               </Link>
             ))}

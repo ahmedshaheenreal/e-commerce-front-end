@@ -9,7 +9,6 @@ async function NewArrivalsSection() {
     cache: "force-cache",
   });
   const products: ProductCardProps[] = await response.json();
-  console.log(products);
   return (
     <section className="py-4">
       <div className="flex justify-between global-container mb-8 items-center">
@@ -27,7 +26,11 @@ async function NewArrivalsSection() {
       </div>
       <div className="global-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products?.map((product) => (
-          <ProductCard key={product.product_id} product={product} />
+          <ProductCard
+            key={product.product_id}
+            product={product}
+            isHomePage={true}
+          />
         ))}
       </div>
     </section>

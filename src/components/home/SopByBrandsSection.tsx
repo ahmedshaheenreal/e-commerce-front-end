@@ -18,7 +18,7 @@ async function ShopByBrandsSection() {
           {brands.slice(0, 8).map((brand: any, i: number) => (
             <div
               key={brand.brand_name + "keys" + i}
-              className="flex justify-center items-center basis-1/9"
+              className="flex justify-center items-center basis-1/5 md:basis-1/9"
             >
               <Link href={`/brand/${brand.brand_name}`} className="w-full">
                 <img
