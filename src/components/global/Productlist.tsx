@@ -15,7 +15,7 @@ async function Productlist({
     cache: "force-cache",
   });
   if (!response.ok) {
-    console.error("Failed to fetch products:", response.statusText);
+    console.log("Failed to fetch products:", response.statusText);
   }
 
   const data: {
@@ -25,6 +25,8 @@ async function Productlist({
     count?: number;
   } = await response.json();
 
+  console.log(` fetching from: >>> ${BASE_API_URL}${apiPath}`);
+  console.log("Productlist fetched data:", data);
   return (
     <>
       <main className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6 mt-8">

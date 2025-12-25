@@ -19,4 +19,6 @@ export interface Product {
   NumberOfRatings: number;
   totalCount: number;
   price_after_discount: number;
+  createdAt?: string;
+  updatedAt?: string;
 }

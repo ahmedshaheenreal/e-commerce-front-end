@@ -8,7 +8,7 @@ async function NewArrivalsSection() {
   const response = await fetch("http://localhost:8000/api/newArrivals", {
     cache: "force-cache",
   });
-  const products: ProductCardProps[] = await response.json();
+  const { products }: { products: ProductCardProps[] } = await response.json();
   return (
     <section className="py-4">
       <div className="flex justify-between global-container mb-8 items-center">
@@ -17,7 +17,7 @@ async function NewArrivalsSection() {
         </h2>
         <span>
           <Link
-            href="/new-arrivals"
+            href="/newarrivals?page=1"
             className="text-primary font-medium flex gap-2"
           >
             View All <ChevronsRight />
