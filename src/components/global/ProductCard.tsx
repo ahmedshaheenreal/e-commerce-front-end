@@ -47,11 +47,13 @@ function ProductCard({ product, isHomePage }: ProductCardComponentProps) {
             </div>
           )}
           <div className="mt-2 flex items-baseline gap-2">
-            <p className="text-sm font-medium">
-              ${product.price_after_discount.toFixed(2) || "0.00"}
-            </p>
+            {product.price_after_discount && (
+              <p className="text-sm font-medium">
+                ${product.price_after_discount?.toFixed(2) || "0.00"}
+              </p>
+            )}
             <p className="text-xs text-gray-500 line-through">
-              ${product.price.toFixed(2) || "0.00"}
+              ${product.price?.toFixed(2) || "0.00"}
             </p>
 
             <p className="text-base text-[#E21D1D] font-normal">

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-
+import HeroImageCategories from "@/components/global/HeroImageCategories";
 async function layout({
   children,
   searchParams,
@@ -17,14 +17,7 @@ async function layout({
           <p className="font-normal ">BLACK FRIDAY </p>
         </div>
 
-        <Suspense fallback={<Skeleton className="w-full h-100]" />}>
-          {" "}
-          <img
-            src="/blackfridayedited.png"
-            alt="Hero Banner for Category page"
-            className="w-full object-cover rounded-2xl "
-          />
-        </Suspense>
+        <HeroImageCategories />
       </div>
       {children}
     </div>

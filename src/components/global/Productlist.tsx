@@ -11,6 +11,7 @@ async function Productlist({
   apiPath?: string;
   path: string;
 }) {
+  console.log("Productlist API PATH:", apiPath);
   const response = await fetch(`${BASE_API_URL}${apiPath}`, {
     cache: "force-cache",
   });
@@ -26,18 +27,24 @@ async function Productlist({
   } = await response.json();
 
   console.log(` fetching from: >>> ${BASE_API_URL}${apiPath}`);
-  console.log("Productlist fetched data:", data);
+  console.log("Searchinggg:", data, path);
   return (
     <>
-      <main className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6 mt-8">
-        {data.products?.map((product: Product) => (
-          <ProductCard
-            key={product.product_id}
-            product={product}
-            isHomePage={false}
-          />
-        ))}
-      </main>
+      {data?.products?.length ? (
+        <main className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6 mt-8">
+          {data.products?.map((product: Product) => (
+            <ProductCard
+              key={product.product_id}
+              product={product}
+              isHomePage={false}
+            />
+          ))}
+        </main>
+      ) : (
+        <div className="text-center py-12">
+          <h3 className="text-xl font-semibold">No products found</h3>
+        </div>
+      )}
 
       <PaginationComponent
         number_of_pages={data.number_of_pages || data.numberOfPages || 1}

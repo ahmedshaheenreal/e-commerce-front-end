@@ -4,7 +4,6 @@ async function ShopByBrandsSection() {
     cache: "force-cache",
   });
   const brands = await response.json();
-
   return (
     <section>
       <div className="global-container py-8">
@@ -20,7 +19,10 @@ async function ShopByBrandsSection() {
               key={brand.brand_name + "keys" + i}
               className="flex justify-center items-center basis-1/5 md:basis-1/9"
             >
-              <Link href={`/brand/${brand.brand_name}`} className="w-full">
+              <Link
+                href={`/brand/${brand.brand_name.replace(/\s+/g, "-")}`}
+                className="w-full"
+              >
                 <img
                   src={brand.brand_image_url}
                   alt={brand.brand_name}
