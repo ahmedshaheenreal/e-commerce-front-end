@@ -4,8 +4,8 @@ function ProductImages({ imageUrl }: { imageUrl: string }) {
       <div className="main-picture flex justify-center">
         <img
           src={imageUrl}
-          alt="Main Product Image"
-          className="max-w-130 rounded-md w-full h-auto object-cover"
+          alt="Main Product Image p-0"
+          className="max-w-130 max-h-[70vh] rounded-md w-full h-auto object-cover"
         />
       </div>
       <div className="sub-pictures flex gap-4 justify-center">

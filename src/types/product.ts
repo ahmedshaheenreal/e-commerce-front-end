@@ -19,6 +19,15 @@ export interface Product {
   NumberOfRatings: number;
   totalCount: number;
   price_after_discount: number;
+
+  description?: string;
+  categories?: Category[];
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface Category {
+  category_id: number;
+  name: string;
+  description: string;
 }
