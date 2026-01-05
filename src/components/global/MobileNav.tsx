@@ -7,7 +7,6 @@ import { useState } from "react";
 
 export default function MobileNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -64,7 +63,6 @@ export default function MobileNav() {
             </Link>
           </div>
         </div>
-
         <Menu onClick={toggleMenu} className="text-primary cursor-pointer" />
       </div>
     </div>

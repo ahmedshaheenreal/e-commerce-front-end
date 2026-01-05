@@ -6,6 +6,7 @@ import { Heart } from "lucide-react";
 import StarRatingReadOnly from "./StarRatingReadOnly";
 import type { ProductCardProps, Product } from "@/types";
 import CardSkelaton from "./Skeletons/CardSkelaton";
+import AddToWishlistButton from "./AddToWishlistButton";
 
 interface ProductCardComponentProps {
   product: Product | any;
@@ -31,9 +32,7 @@ function ProductCard({ product, isHomePage }: ProductCardComponentProps) {
             <h2 className="text-base font-semibold">
               {product.name || "No name"}
             </h2>
-            <div className="lik">
-              <Heart className="w-4 h-4" fill="red" />
-            </div>
+            <AddToWishlistButton userId={382} productId={282} />
           </div>
           <p className="text-sm text-gray-500">
             {product.brand_name || "No brand"}

@@ -1,8 +1,12 @@
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import { ShoppingCart, Heart, User } from "lucide-react";
+import { Button } from "../ui/button";
+import { getCurrentUser } from "@/lib/auth";
 
-export default function DesktopNav() {
+import { redirect } from "next/navigation";
+import { logout } from "@/lib/actions";
+export default async function DesktopNav() {
   const categories = [
     "Handbags",
     "Watches",
@@ -10,6 +14,7 @@ export default function DesktopNav() {
     "Jewellery",
     "Apparels",
   ];
+  const user = await getCurrentUser();
 
   return (
     <div className="flex items-center justify-between  py-5.5 px-5 global-container w-full mb-4">
@@ -43,6 +48,12 @@ export default function DesktopNav() {
           <Link href={"/profile"}>
             <User className="text-primary" />
           </Link>
+          {user && (
+            <form action={logout}>
+              <Button type="submit">{"logout"}</Button>
+            </form>
+          )}
+          {!user && <Link href={"/login"}>{"login"}</Link>}
         </div>
       </div>
     </div>
