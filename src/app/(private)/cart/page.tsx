@@ -3,7 +3,7 @@ import BreadCumber from "@/components/global/BreadCumber";
 import OrderSummery from "@/components/global/OrderSummery";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
-
+export const dynamic = "force-dynamic";
 async function page() {
   try {
     return (

@@ -1,11 +1,11 @@
 "use client";
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormData } from "@/types";
 import Link from "next/link";
 import { BASE_API_URL } from "@/CONSTANTS";
+export const dynamic = "force-dynamic";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);

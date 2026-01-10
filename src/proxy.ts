@@ -41,17 +41,5 @@ export async function proxy(request: NextRequest) {
 
 // This limits the middleware to specific paths
 export const config = {
-  matcher: [
-    "/profile",
-    "/cart",
-    "/wishlist",
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: ["/profile", "/cart", "/wishlist"],
 };

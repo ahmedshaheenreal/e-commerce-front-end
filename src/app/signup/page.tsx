@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema, type SignupFormData } from "@/types";
 import Link from "next/link";
 import { BASE_API_URL } from "@/CONSTANTS";
+export const dynamic = "force-dynamic";
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);

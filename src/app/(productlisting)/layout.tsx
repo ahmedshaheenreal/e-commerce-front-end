@@ -1,13 +1,5 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import { Suspense } from "react";
 import HeroImageCategories from "@/components/global/HeroImageCategories";
-async function layout({
-  children,
-  searchParams,
-}: {
-  searchParams: Promise<{ page?: string }>;
-  children: React.ReactNode;
-}) {
+async function layout({ children }: { children: React.ReactNode }) {
   // const { page } = await searchParams;
   return (
     <div className="global-container py-4">

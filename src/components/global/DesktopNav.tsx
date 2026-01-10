@@ -1,12 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import { ShoppingCart, Heart, User } from "lucide-react";
 import { Button } from "../ui/button";
-import { getCurrentUser } from "@/lib/auth";
-
-import { redirect } from "next/navigation";
+import { useAuthStore } from "@/stores/auth.store";
 import { logout } from "@/lib/actions";
-export default async function DesktopNav() {
+
+export default function DesktopNav() {
   const categories = [
     "Handbags",
     "Watches",
@@ -14,7 +15,8 @@ export default async function DesktopNav() {
     "Jewellery",
     "Apparels",
   ];
-  const user = await getCurrentUser();
+
+  const user = useAuthStore((s) => s.user);
 
   return (
     <div className="flex items-center justify-between  py-5.5 px-5 global-container w-full mb-4">

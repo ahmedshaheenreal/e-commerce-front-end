@@ -1,17 +1,12 @@
-import React from "react";
 import {
   Table,
   TableHead,
   TableRow,
-  TableCell,
   TableBody,
   TableHeader,
   TableCaption,
   TableFooter,
 } from "@/components/ui/table";
-import { cookies } from "next/headers";
-import { BASE_API_URL } from "@/CONSTANTS";
-import { CartItemsResponse } from "@/types";
 
 import CartTableRows from "./CartTableRows";
 import FooterData from "./FooterData";
