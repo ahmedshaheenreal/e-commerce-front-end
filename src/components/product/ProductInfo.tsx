@@ -41,7 +41,7 @@ function ProductInfo({
       {/* delivery details */}
       <DeliveryDetails />
       {/* QuantityCOunter  */}
-      <QuantityCounter />
+      <QuantityCounter quantity={1} cartItemId={0} isProductPage={true} />
       {/* offers section */}
       <Offers />
       {/* action buttons */}

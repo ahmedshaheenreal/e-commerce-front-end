@@ -37,11 +37,9 @@ function ProductBasicDetails({
           ${price_after_discount}
         </strong>{" "}
         <s className="text-low-emphasis text-xl md:text-3xl font-semibold">
-          {" "}
           ${price}
         </s>
         <span className="text-red-600 text-xl font-medium">
-          {" "}
           {discount_percentage.toFixed(2)}% OFF
         </span>
       </div>

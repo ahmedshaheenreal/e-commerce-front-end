@@ -1,16 +1,31 @@
-import { cookies } from "next/headers";
-import { BASE_API_URL } from "@/CONSTANTS";
+import ProductListTable from "@/components/cart/ProductListTable";
+import BreadCumber from "@/components/global/BreadCumber";
+import OrderSummery from "@/components/global/OrderSummery";
+import { getCurrentUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
 async function page() {
   try {
-    const cookieStore = await cookies();
-    const response = await fetch(`${BASE_API_URL}/cart`, {
-      headers: {
-        Cookie: cookieStore.toString(),
-      },
-      cache: "no-store",
-    });
-    const data = await response.json();
-    return <div>{JSON.stringify(data)}</div>;
+    return (
+      <div className="global-container">
+        <div>
+          <h3 className="text-[34px] font-semibold text-primary py-2 ">
+            My Cart
+          </h3>
+        </div>
+        <div>
+          <BreadCumber name={"Cart"} />
+        </div>
+        <div className="flex gap-8 justify-between flex-col lg:flex-row  items-center">
+          <section className="itemslist basis-1/2 ">
+            <ProductListTable />
+          </section>
+          <section className="oredersummery">
+            <OrderSummery />
+          </section>
+        </div>
+      </div>
+    );
   } catch (error) {
     console.error("ERROR", error);
     return (

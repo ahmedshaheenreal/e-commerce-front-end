@@ -5,7 +5,9 @@ import NavBar from "@/components/global/NavBar";
 import Footer from "@/components/global/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { getCurrentUser } from "@/lib/auth";
+import { getCart } from "@/lib/actions";
 import AuthProvider from "@/providers/AuthProvider";
+import CartHydrator from "@/providers/CartProvider";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -22,16 +24,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const user = await getCurrentUser();
+  const cart = await getCart();
   return (
     <html lang="en">
       <body
         className={`${inter.variable} antialiased flex flex-col min-h-screen`}
       >
         <AuthProvider initialUser={user || null}>
-          <NavBar />
-          <main className="grow">{children}</main>
-          <Footer />
-          <Toaster />
+          <CartHydrator initialCart={cart || null}>
+            <NavBar />
+            <main className="grow">{children}</main>
+            <Footer />
+            <Toaster />
+          </CartHydrator>
         </AuthProvider>
       </body>
     </html>

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { ProductCardProps, Product } from "./product";
 import { User } from "./user";
+import { CartItem, CartItemsResponse } from "./cart";
 // Signup Validation Schema
 export const signupSchema = z
   .object({
@@ -41,4 +42,4 @@ export const loginSchema = z.object({
 
 export type LoginFormData = z.infer<typeof loginSchema>;
 
-export type { ProductCardProps, Product, User };
+export type { ProductCardProps, Product, User, CartItem, CartItemsResponse };
