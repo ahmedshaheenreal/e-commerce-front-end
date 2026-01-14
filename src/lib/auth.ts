@@ -11,14 +11,14 @@ export const getCurrentUser = cache(async () => {
       headers: {
         Cookie: cookieStore.toString(),
       },
-      cache: "no-store",
     });
+
+    const data = await response.json();
     if (!response.ok) {
-      throw new Error("Error fetching user data: ");
+      throw { message: data.message };
     }
-    const data: User = await response.json();
     return data;
   } catch (error) {
-    console.log("ERROR", JSON.stringify(error));
+    console.log("ERROR getting user", JSON.stringify(error));
   }
 });

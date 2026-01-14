@@ -26,21 +26,18 @@ export default async function RootLayout({
   // Don't fetch user and cart during static generation
   // They will be fetched client-side instead
   const user = null;
-  const cart = null;
 
   return (
     <html lang="en">
       <body
         className={`${inter.variable} antialiased flex flex-col min-h-screen`}
       >
-        <AuthProvider initialUser={user || null}>
-          <CartHydrator initialCart={cart || null}>
-            <NavBar />
-            <main className="grow">{children}</main>
-            <Footer />
-            <Toaster />
-          </CartHydrator>
-        </AuthProvider>
+        <AuthProvider initialUser={user || null} />
+
+        <NavBar />
+        <main className="grow">{children}</main>
+        <Footer />
+        <Toaster />
       </body>
     </html>
   );

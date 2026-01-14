@@ -8,10 +8,9 @@ import { BASE_API_URL } from "@/CONSTANTS";
 
 type Props = {
   initialUser: User | null;
-  children: React.ReactNode;
 };
 
-export default function AuthProvider({ initialUser, children }: Props) {
+export default function AuthProvider({ initialUser }: Props) {
   const setUser = useAuthStore((s) => s.setUser);
 
   useEffect(() => {
@@ -40,5 +39,5 @@ export default function AuthProvider({ initialUser, children }: Props) {
     fetchUser();
   }, [initialUser, setUser]);
 
-  return <>{children}</>;
+  return null;
 }
