@@ -15,9 +15,9 @@ function ProductBasicDetails({
   price: number;
   discount_percentage: number;
 }) {
+  console.log("THe PRICE: ,", price_after_discount);
   return (
     <div>
-      {" "}
       <div>
         <h1 className="text-dark text-3xl font-semibold">
           {name || "Product Name"}
@@ -33,9 +33,9 @@ function ProductBasicDetails({
         />
       </div>
       <div className="space-x-2 mt-4">
-        <strong className="font-bold text-3xl md:text-5xl ">
+        <strong className="font-bold text-3xl md:text-5xl  ">
           ${price_after_discount}
-        </strong>{" "}
+        </strong>
         <s className="text-low-emphasis text-xl md:text-3xl font-semibold">
           ${price}
         </s>
