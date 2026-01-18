@@ -7,4 +7,5 @@ export type User = {
   phone: string;
   dateOfBirth: string;
   profilePicture: string | null;
+  address: string;
 };

@@ -6,100 +6,155 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { User } from "@/types";
+import { UpdateUserScheme, updateUserScheme, User } from "@/types";
+import { useAuthStore } from "@/stores/auth.store";
+import { BASE_API_URL } from "@/CONSTANTS";
+import { toast } from "sonner";
+import { useEffect, useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import UpdatePassword from "./UpdatePassword";
+interface Inputs extends User {
+  password: string;
+  newPassword: string;
+}
 
 function UserDataForm() {
+  const user = useAuthStore((s) => s.user);
+
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
-
-  interface Inputs extends User {
-    password: string;
-    newPassword: string;
-  }
-  const submit: SubmitHandler<User> = (data) => {};
+  } = useForm<UpdateUserScheme>({
+    resolver: zodResolver(updateUserScheme),
+    mode: "onChange",
+    values: user
+      ? {
+          firstName: user.firstName ?? "",
+          lastName: user.lastName ?? "",
+          email: user.email ?? "",
+          phone: user.phone ?? "",
+          address: user.address ?? "",
+          dateOfBirth: user.dateOfBirth ?? "",
+        }
+      : undefined,
+  });
+  console.log(" user:", user);
+  // useEffect(() => {
+  //   if (user) {
+  //     reset(
+  //       {
+  //         firstName: user.firstName || "",
+  //         lastName: user.lastName || "",
+  //         email: user.email || "",
+  //         phone: user.phone || "",
+  //         address: user.address || "",
+  //         dateOfBirth: user.dateOfBirth || "",
+  //       },
+  //       { keepDirty: false },
+  //     );
+  //   }
+  // }, [user, reset]);
+  const submit: SubmitHandler<UpdateUserScheme> = async (data) => {
+    const res = await fetch(`${BASE_API_URL}/user/profile`, {
+      body: JSON.stringify({ ...data, role: "user" }),
+      credentials: "include",
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const body = await res.json();
+    if (!res.ok) {
+      console.log(JSON.stringify(body));
+      toast.error(body.message);
+      return;
+    }
+    toast.success("User Info Updated");
+  };
+  console.log("current user", user);
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <>
       <div>
-        <UploadImageForm />
+        <UploadImageForm imgUrl={user?.profilePicture || ""} />
       </div>
-      <div className="textfields my-8 flex flex-col gap-y-4 ">
-        <div className="flex gap-4">
-          <div className="space-y-2">
-            <Label>First Name</Label>
-            <Input
-              {...register("firstName", { required: true })}
-              className="focus-visible:ring-0 border-none rounded-none"
-            />
+      <form onSubmit={handleSubmit(submit)}>
+        <div className="textfields my-8 flex flex-col gap-y-4 ">
+          <div className="flex gap-4">
+            <div className="space-y-2">
+              <Label>First Name</Label>
+              <Input
+                {...register("firstName", { required: true })}
+                className="focus-visible:ring-0 border-none rounded-none"
+              />
+              {errors.firstName && (
+                <p className="text-sm text-error">{errors.firstName.message}</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Label>Last Name</Label>
+              <Input
+                {...register("lastName", { required: true })}
+                className="focus-visible:ring-0 border-none rounded-none"
+              />
+              {errors.lastName && (
+                <p className="text-sm text-error">{errors.lastName.message}</p>
+              )}
+            </div>
           </div>
           <div className="space-y-2">
-            <Label>Last Name</Label>
+            <Label>Email</Label>
             <Input
-              {...register("lastName", { required: true })}
+              {...register("email", { required: true })}
+              type="email"
               className="focus-visible:ring-0 border-none rounded-none"
             />
+            {errors.email && (
+              <p className="text-sm text-error">{errors.email.message}</p>
+            )}
+          </div>
+          <div className="space-y-2">
+            <Label>Mobile Number</Label>
+            <Input
+              {...register("phone", { required: true })}
+              type="tel"
+              className="focus-visible:ring-0 border-none rounded-none"
+            />
+            {errors.phone && (
+              <p className="text-sm text-error">{errors.phone.message}</p>
+            )}
+          </div>
+          <div className="space-y-2">
+            <Label>Address</Label>
+            <Input
+              {...register("address", { required: true })}
+              type="text"
+              className="focus-visible:ring-0 border-none rounded-none"
+            />
+            {errors.address && <p>{errors.address.message}</p>}
+          </div>
+          <div className="space-y-2">
+            <Label>Date of birth</Label>
+            <Input
+              {...register("dateOfBirth", { required: true })}
+              type="date"
+              className="focus-visible:ring-0 border-none rounded-none"
+            />
+            {errors.dateOfBirth && <p>{errors.dateOfBirth.message}</p>}
           </div>
         </div>
-        <div className="space-y-2">
-          <Label>Email</Label>
-          <Input
-            {...register("email", { required: true })}
-            type="email"
-            className="focus-visible:ring-0 border-none rounded-none"
-          />
+        <div className="flex justify-end">
+          <Button type="submit" size={"lg"} className="cursor-pointer">
+            Save
+          </Button>
         </div>
-        <div className="space-y-2">
-          <Label>Mobile Number</Label>
-          <Input
-            {...register("phone", { required: true })}
-            type="tel"
-            className="focus-visible:ring-0 border-none rounded-none"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label>Date of birth</Label>
-          <Input
-            {...register("dateOfBirth", { required: true })}
-            type="date"
-            className="focus-visible:ring-0 border-none rounded-none"
-          />
-        </div>
-        <h3 className="font-medium  md:text-xl text-lg">Change Password</h3>
-        <Separator />
+      </form>
 
-        <div className="flex flex-col gap-4">
-          <div className="space-y-2">
-            <Label>Current Passowrd</Label>
-            <Input
-              type="password"
-              className="focus-visible:ring-0 border-none rounded-none"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>New Passowrd</Label>
-            <Input
-              type="password"
-              className="focus-visible:ring-0 border-none rounded-none"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>Confirm new passowrd</Label>
-            <Input
-              type="password"
-              className="focus-visible:ring-0 border-none rounded-none"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-end">
-        <Button type="submit" size={"lg"}>
-          Save
-        </Button>
-      </div>
-    </form>
+      <UpdatePassword />
+    </>
   );
 }
 
