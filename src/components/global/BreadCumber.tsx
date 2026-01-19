@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-async function BreadCumber({ name }: { name: string }) {
+function BreadCumber({ name }: { name: string }) {
   return (
     <Breadcrumb className="hidden md:flex font-medium py-4 text-base">
       <BreadcrumbList>
