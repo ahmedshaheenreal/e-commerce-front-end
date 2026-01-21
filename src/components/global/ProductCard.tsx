@@ -32,7 +32,7 @@ function ProductCard({ product, isHomePage }: ProductCardComponentProps) {
             <h2 className="text-base font-semibold">
               {product.name || "No name"}
             </h2>
-            <AddToWishlistButton userId={382} productId={282} />
+            <AddToWishlistButton productId={product.product_id} />
           </div>
           <p className="text-sm text-gray-500">
             {product.brand_name || "No brand"}

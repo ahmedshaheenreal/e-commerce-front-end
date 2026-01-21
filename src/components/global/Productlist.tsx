@@ -2,6 +2,7 @@ import { BASE_API_URL } from "@/CONSTANTS";
 import { Product } from "@/types";
 import ProductCard from "./ProductCard";
 import PaginationComponent from "./PaginationComponent";
+import { cookies } from "next/headers";
 
 async function Productlist({
   path,
@@ -12,8 +13,12 @@ async function Productlist({
   path: string;
 }) {
   console.log("Productlist API PATH:", apiPath);
+  const cookieStore = await cookies();
   const response = await fetch(`${BASE_API_URL}${apiPath}`, {
-    cache: "force-cache",
+    cache: path.includes("wishlist") ? "no-store" : "force-cache",
+    headers: {
+      cookie: cookieStore.toString(),
+    },
   });
   if (!response.ok) {
     console.log("Failed to fetch products:", response.statusText);
@@ -26,8 +31,6 @@ async function Productlist({
     count?: number;
   } = await response.json();
 
-  console.log(` fetching from: >>> ${BASE_API_URL}${apiPath}`);
-  console.log("Searchinggg:", data, path);
   return (
     <>
       {data?.products?.length ? (

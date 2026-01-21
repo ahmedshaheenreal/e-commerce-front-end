@@ -15,7 +15,7 @@ const menuItems: Route[] = [
   {
     displayName: "Personal Information",
     path: "/profile",
-    isActive: true,
+    isActive: false,
   },
   {
     displayName: "Refer and Earn",

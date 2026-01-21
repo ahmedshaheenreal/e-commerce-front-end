@@ -33,14 +33,14 @@ export default function MobileNav() {
         </div>
 
         <div
-          className={`${menuClasses} origin-top flex absolute top-full left-0 w-full p-2 gap-4 flex-col`}
+          className={`${menuClasses} origin-top flex absolute z-100 top-full left-0 w-full p-2 gap-4 flex-col`}
         >
           <nav className="flex flex-col gap-4 text-sm font-medium text-primary">
             {categories.map((c, i) => (
               <Link
+                onClick={() => setIsMenuOpen(false)}
                 href={`/category/${c}`}
                 key={i}
-                onClick={() => setIsMenuOpen(false)}
               >
                 {c}
               </Link>
@@ -52,13 +52,13 @@ export default function MobileNav() {
           </div>
 
           <div className="customer-options flex gap-4 items-center">
-            <Link href={"/cart"}>
+            <Link onClick={() => setIsMenuOpen(false)} href={"/cart"}>
               <ShoppingCart className="text-primary" />
             </Link>
-            <Link href={"/wishlist"}>
+            <Link onClick={() => setIsMenuOpen(false)} href={"/wishlist"}>
               <Heart className="text-primary" />
             </Link>
-            <Link href={"/profile"}>
+            <Link onClick={() => setIsMenuOpen(false)} href={"/profile"}>
               <User className="text-primary" />
             </Link>
           </div>

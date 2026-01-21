@@ -1,22 +1,20 @@
 import { cookies } from "next/headers";
 import { BASE_API_URL } from "@/CONSTANTS";
+import Productlist from "@/components/global/Productlist";
+import { getCurrentUser } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 async function page() {
   try {
-    const cookieStore = await cookies();
-    const response = await fetch(`${BASE_API_URL}/wishlist`, {
-      headers: {
-        Cookie: cookieStore.toString(),
-      },
-      cache: "no-store",
-    });
-    const data = await response.json();
-    return <div>{JSON.stringify(data)}</div>;
-  } catch (error) {
-    console.error("ERROR", error);
+    return (
+      <div className="grow">
+        <Productlist path="/wishlist" apiPath={`/wishlist`} />
+      </div>
+    );
+  } catch (error: any) {
+    console.error("ERROR", JSON.stringify(error));
     return (
       <>
-        <p>ERROR UNKONWN</p>
+        <p>{JSON.stringify(error)}</p>
       </>
     );
   }

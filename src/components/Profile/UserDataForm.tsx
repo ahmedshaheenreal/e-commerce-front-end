@@ -42,22 +42,7 @@ function UserDataForm() {
         }
       : undefined,
   });
-  console.log(" user:", user);
-  // useEffect(() => {
-  //   if (user) {
-  //     reset(
-  //       {
-  //         firstName: user.firstName || "",
-  //         lastName: user.lastName || "",
-  //         email: user.email || "",
-  //         phone: user.phone || "",
-  //         address: user.address || "",
-  //         dateOfBirth: user.dateOfBirth || "",
-  //       },
-  //       { keepDirty: false },
-  //     );
-  //   }
-  // }, [user, reset]);
+
   const submit: SubmitHandler<UpdateUserScheme> = async (data) => {
     const res = await fetch(`${BASE_API_URL}/user/profile`, {
       body: JSON.stringify({ ...data, role: "user" }),
@@ -77,7 +62,7 @@ function UserDataForm() {
   };
   console.log("current user", user);
   return (
-    <>
+    <div>
       <div>
         <UploadImageForm imgUrl={user?.profilePicture || ""} />
       </div>
@@ -154,7 +139,7 @@ function UserDataForm() {
       </form>
 
       <UpdatePassword />
-    </>
+    </div>
   );
 }
 
