@@ -9,7 +9,7 @@ function layout({ children }: { children: React.ReactNode }) {
       <div className="flex gap-8">
         <SideBar />
 
-        <>{children}</>
+        <div className="grow">{children}</div>
       </div>
     </div>
   );

@@ -82,3 +82,9 @@ export const updatePasswordScheme = z
 export type UpdatePassowrdScheme = z.infer<typeof updatePasswordScheme>;
 
 export type { ProductCardProps, Product, User, CartItem, CartItemsResponse };
+export interface WishListItemsResponse {
+  numberOfPages: number;
+  count: number;
+  products: Product[];
+  wishListItemIds: number[];
+}

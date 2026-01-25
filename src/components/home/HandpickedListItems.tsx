@@ -10,8 +10,8 @@ function HandpickedListItems() {
     <>
       {" "}
       {categories.map(({ name, image, id }) => (
-        <Suspense key={id} fallback={<CardSkelaton />}>
-          <CarouselItem key={name} className="max-w-76 ">
+        <Suspense key={id + "category"} fallback={<CardSkelaton />}>
+          <CarouselItem key={name + id} className="max-w-76 ">
             <Link href={`/category/handpicked/${id}`} title={name}>
               <Card className="relative  max-w-76 py-0 border-none hover:shadow-md transition-shadow duration-300 overflow-hidden">
                 <div>

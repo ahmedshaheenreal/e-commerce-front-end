@@ -8,7 +8,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useSearchParams } from "next/navigation";
+import { useWishList } from "@/stores/wishlist.sstore";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 function PaginationComponent({
   number_of_pages,
@@ -17,6 +18,8 @@ function PaginationComponent({
   number_of_pages: number;
   pagenationPath: string;
 }) {
+  const isWishlist = usePathname().includes("wishlist");
+  const fetchPage = useWishList((s) => s.fetchPage);
   const currPage = useSearchParams().get("page") || "1";
   const getPageNumbers = () => {
     const pages = [];
@@ -45,6 +48,14 @@ function PaginationComponent({
       <Pagination className="text-primary max-w-3/4 space-x-2">
         <PaginationPrevious
           className="cursor-pointer  bg-grey "
+          onClick={(e) => {
+            if (Number(currPage) >= number_of_pages) {
+              e.preventDefault();
+              return;
+            }
+            if (isWishlist)
+              fetchPage(Number(currPage) > 1 ? Number(currPage) - 1 : 1);
+          }}
           href={`${pagenationPath}?page=${
             Number(currPage) > 1 ? Number(currPage) - 1 : 1
           }`}
@@ -63,6 +74,9 @@ function PaginationComponent({
                 <PaginationLink
                   href={`${pagenationPath}?page=${i + 1}`}
                   isActive={Number(currPage) === i + 1}
+                  onClick={() => {
+                    if (isWishlist) fetchPage(Number(currPage) + 1);
+                  }}
                 >
                   {i + 1}
                 </PaginationLink>
@@ -76,6 +90,10 @@ function PaginationComponent({
               e.preventDefault();
               return;
             }
+            if (isWishlist)
+              fetchPage(
+                Number(currPage) < number_of_pages ? Number(currPage) + 1 : 1,
+              );
           }}
           className="cursor-pointer  bg-grey "
           href={`${pagenationPath}?page=${

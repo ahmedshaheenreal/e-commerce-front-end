@@ -8,6 +8,7 @@ import { getCart } from "@/lib/actions";
 import AuthProvider from "@/providers/AuthProvider";
 import CartHydrator from "@/providers/CartProvider";
 import { ViewTransition } from "react";
+import WishListItemIdsHydrator from "@/providers/WishListItemIdsHydrator";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,7 +33,7 @@ export default function RootLayout({
         className={`${inter.variable} antialiased flex flex-col min-h-screen`}
       >
         <AuthProvider initialUser={user || null} />
-
+        <WishListItemIdsHydrator initialWishlistIds={null} />
         <NavBar />
         <main className="grow">
           <>{children}</>

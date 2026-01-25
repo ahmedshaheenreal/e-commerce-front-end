@@ -1,10 +1,9 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Card, CardContent } from "../ui/card";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 import StarRatingReadOnly from "./StarRatingReadOnly";
-import type { ProductCardProps, Product } from "@/types";
+import type { Product } from "@/types";
 import CardSkelaton from "./Skeletons/CardSkelaton";
 import AddToWishlistButton from "./AddToWishlistButton";
 
@@ -32,7 +31,7 @@ function ProductCard({ product, isHomePage }: ProductCardComponentProps) {
             <h2 className="text-base font-semibold">
               {product.name || "No name"}
             </h2>
-            <AddToWishlistButton productId={product.product_id} />
+            <AddToWishlistButton product={product} />
           </div>
           <p className="text-sm text-gray-500">
             {product.brand_name || "No brand"}

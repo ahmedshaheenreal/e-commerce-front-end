@@ -1,15 +1,8 @@
-import { cookies } from "next/headers";
-import { BASE_API_URL } from "@/CONSTANTS";
-import Productlist from "@/components/global/Productlist";
-import { getCurrentUser } from "@/lib/auth";
+import WishList from "@/components/wishlist/Wishist";
 export const dynamic = "force-dynamic";
 async function page() {
   try {
-    return (
-      <div className="grow">
-        <Productlist path="/wishlist" apiPath={`/wishlist`} />
-      </div>
-    );
+    return <WishList />;
   } catch (error: any) {
     console.error("ERROR", JSON.stringify(error));
     return (
