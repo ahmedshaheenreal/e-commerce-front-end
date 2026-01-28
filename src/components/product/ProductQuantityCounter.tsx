@@ -38,7 +38,7 @@ function ProductQuantityCounter({
           >
             <Minus />
           </Button>
-          <span className="text-xl text-dark font-semibold min-w-5 text-center text-primary">
+          <span className="text-xl  font-semibold min-w-5 text-center text-primary">
             {quantity}
           </span>
           <Button

@@ -56,7 +56,7 @@ export default function SignupPage() {
 
       if (!response.ok) {
         setErrorMessage(
-          responseData.message || "Signup failed. Please try again."
+          responseData.message || "Signup failed. Please try again.",
         );
         return;
       }
@@ -111,7 +111,7 @@ export default function SignupPage() {
               id="firstName"
               placeholder="Ahmed"
               {...register("firstName")}
-              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                 errors.firstName ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -135,7 +135,7 @@ export default function SignupPage() {
               id="lastName"
               placeholder="Shaheen"
               {...register("lastName")}
-              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                 errors.lastName ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -159,7 +159,7 @@ export default function SignupPage() {
               id="email"
               placeholder="example@email.com"
               {...register("email")}
-              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -183,7 +183,7 @@ export default function SignupPage() {
               id="phone"
               placeholder="+1234567890"
               {...register("phone")}
-              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                 errors.phone ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -206,7 +206,7 @@ export default function SignupPage() {
               type="date"
               id="dateOfBirth"
               {...register("dateOfBirth")}
-              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                 errors.dateOfBirth ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -230,7 +230,7 @@ export default function SignupPage() {
               placeholder="123 Main St, Springfield, USA"
               rows={2}
               {...register("address")}
-              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                 errors.address ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -255,7 +255,7 @@ export default function SignupPage() {
                 id="password"
                 placeholder="••••••••"
                 {...register("password")}
-                className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 }`}
               />
@@ -291,7 +291,7 @@ export default function SignupPage() {
                 id="confirmPassword"
                 placeholder="••••••••"
                 {...register("confirmPassword")}
-                className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-tint/50 ${
                   errors.confirmPassword ? "border-red-500" : "border-gray-300"
                 }`}
               />
@@ -314,7 +314,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={isFormSubmitting || isSubmitting}
-            className="w-full bg-indigo-600 text-white py-2 rounded-md font-medium hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-primary text-white py-2 rounded-md font-medium hover:bg-primary-tint transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isFormSubmitting || isSubmitting
               ? "Creating Account..."
@@ -327,7 +327,7 @@ export default function SignupPage() {
           Already have an account?{" "}
           <Link
             href="/login"
-            className="text-indigo-600 hover:underline font-medium"
+            className="text-primary-tint hover:underline font-medium"
           >
             Login here
           </Link>

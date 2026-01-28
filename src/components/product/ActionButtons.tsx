@@ -22,15 +22,13 @@ function ActionButtons({
     <div className="flex gap-4 lg:pr-10">
       <Button
         className="add-to-cart-button grow cursor-pointer"
-        onClick={() =>
-          isAuthenticated && addToCart(product.product_id, quantity)
-        }
+        onClick={() => addToCart(product.product_id, quantity)}
       >
         <ShoppingBag className="mr-2" /> Add to Cart
       </Button>
       <Button
         className="add-to-wish grow cursor-pointer"
-        onClick={() => isAuthenticated && addToWishList(product)}
+        onClick={() => addToWishList(product)}
         variant={"outline"}
       >
         <Heart className="mr-2" /> Add to Wishlist

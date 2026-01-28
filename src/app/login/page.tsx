@@ -45,7 +45,7 @@ export default function LoginPage() {
 
       if (!response.ok) {
         setErrorMessage(
-          responseData.message || "Login failed. Please try again."
+          responseData.message || "Login failed. Please try again.",
         );
         return;
       }
@@ -99,7 +99,7 @@ export default function LoginPage() {
               id="email"
               placeholder="example@email.com"
               {...register("email")}
-              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${
+              className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60 transition ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -124,7 +124,7 @@ export default function LoginPage() {
                 id="password"
                 placeholder="••••••••"
                 {...register("password")}
-                className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${
+                className={`w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60 transition ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 }`}
               />
@@ -148,13 +148,13 @@ export default function LoginPage() {
             <label className="flex items-center">
               <input
                 type="checkbox"
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="w-4 h-4 text-primary-tint border-gray-300 rounded focus:ring-primary-tint"
               />
               <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
             <Link
               href="#"
-              className="text-sm text-indigo-600 hover:underline font-medium"
+              className="text-sm text-primary hover:underline font-medium"
             >
               Forgot password?
             </Link>
@@ -164,7 +164,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isFormSubmitting || isSubmitting}
-            className="w-full bg-indigo-600 text-white py-2 rounded-md font-medium hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-primary text-white py-2 rounded-md font-medium cursor-pointer transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isFormSubmitting || isSubmitting ? "Signing in..." : "Sign In"}
           </button>
@@ -175,7 +175,7 @@ export default function LoginPage() {
           Don't have an account?{" "}
           <Link
             href="/signup"
-            className="text-indigo-600 hover:underline font-medium"
+            className="text-primary hover:underline font-medium"
           >
             Sign up here
           </Link>
