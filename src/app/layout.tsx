@@ -4,10 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/global/NavBar";
 import Footer from "@/components/global/Footer";
 import { Toaster } from "@/components/ui/sonner";
-import { getCart } from "@/lib/actions";
 import AuthProvider from "@/providers/AuthProvider";
-import CartHydrator from "@/providers/CartProvider";
-import { ViewTransition } from "react";
 import WishListItemIdsHydrator from "@/providers/WishListItemIdsHydrator";
 
 const inter = Inter({
@@ -25,21 +22,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = null;
-
   return (
     <html lang="en">
       <body
         className={`${inter.variable} antialiased flex flex-col min-h-screen`}
       >
-        <AuthProvider initialUser={user || null} />
-        <WishListItemIdsHydrator initialWishlistIds={null} />
+        <AuthProvider />
         <NavBar />
         <main className="grow">
           <>{children}</>
         </main>
         <Footer />
         <Toaster />
+        {/* Load wishlist after critical content */}
+        <WishListItemIdsHydrator initialWishlistIds={null} />
       </body>
     </html>
   );

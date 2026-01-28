@@ -64,6 +64,8 @@ export const useWishList = create<WishListItemsState>()((set, get) => ({
     }
   },
   addToWishList: async (product: Product) => {
+    console.log("ADDING TO WISHLIST:", product);
+
     const currentAuthState = useAuthStore.getState();
     if (!currentAuthState.isAuthenticated) {
       console.log("NOT AUTHENTICATED:", currentAuthState);

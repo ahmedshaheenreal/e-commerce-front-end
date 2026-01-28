@@ -1,10 +1,11 @@
 "use client";
+import { BASE_API_URL } from "@/CONSTANTS";
 import { Button } from "../ui/button";
 import { useCartState } from "@/stores/cart.store";
-
+import Link from "next/link";
 function OrderSummery() {
   const { totalPriceAfterDiscount, totalPriceBeforeDiscount } = useCartState(
-    (s) => s.cart
+    (s) => s.cart,
   );
 
   return (
@@ -24,7 +25,7 @@ function OrderSummery() {
         <p className="text-low-emphasis">Discount</p>{" "}
         <span className="font-medium text-dark">
           {`$${(totalPriceBeforeDiscount - totalPriceAfterDiscount).toFixed(
-            2
+            2,
           )}`}
         </span>
       </div>
@@ -39,12 +40,40 @@ function OrderSummery() {
         </span>
       </div>
       <footer className="flex justify-between gap-4 py-1">
-        <Button size={"lg"} className="grow  cursor-pointer">
+        <Button
+          size={"lg"}
+          className="grow  cursor-pointer"
+          onClick={async () => {
+            // Add your place order logic here
+            try {
+              console.log("Placing order...");
+              const res = await fetch(`${BASE_API_URL}/checkout-payment`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                // body: JSON.stringify(orderData), // Include order data if needed
+              });
+
+              const data = await res.json();
+              if (data.url) {
+                window.location.href = data.url; // Redirect to the payment URL
+              }
+
+              console.log("Order placed successfully");
+            } catch (error) {
+              console.error("Error placing order:", error);
+            }
+          }}
+        >
           Place Order
         </Button>
-        <Button className="grow cursor-pointer" size={"lg"} variant={"outline"}>
-          Continue shopping
-        </Button>
+        <Link href="/" className="grow  cursor-pointer">
+          <Button size={"lg"} variant={"outline"} className="w-full">
+            Continue shopping
+          </Button>
+        </Link>
       </footer>
     </div>
   );

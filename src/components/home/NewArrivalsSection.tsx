@@ -1,14 +1,37 @@
-import { Car, ChevronsRight } from "lucide-react";
+"use client";
+import { ChevronsRight } from "lucide-react";
 import Link from "next/link";
-import { Card } from "../ui/card";
+
 import ProductCard from "../global/ProductCard";
 import type { ProductCardProps } from "@/types";
+import { useEffect, useState } from "react";
+import { BASE_API_URL } from "@/CONSTANTS";
 
-async function NewArrivalsSection() {
-  const response = await fetch("http://localhost:8000/api/newArrivals", {
-    cache: "force-cache",
-  });
-  const { products }: { products: ProductCardProps[] } = await response.json();
+function NewArrivalsSection() {
+  const [products, setProducts] = useState<ProductCardProps[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${BASE_API_URL}/newArrivals`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data.products || []);
+        }
+      } catch (error) {
+        console.log("Failed to fetch new arrivals", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) return null;
+
   return (
     <section className="py-4">
       <div className="flex justify-between global-container mb-8 items-center">

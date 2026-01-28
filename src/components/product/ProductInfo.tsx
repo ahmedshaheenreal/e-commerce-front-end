@@ -1,16 +1,9 @@
-import React from "react";
-import StarRatingReadOnly from "../global/StarRatingReadOnly";
 import { Separator } from "../ui/separator";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Minus, Plus, ShoppingBag, Heart } from "lucide-react";
-import { Card } from "../ui/card";
-import Link from "next/link";
-import Offers from "./Offers";
-import ActionButtons from "./ActionButtons";
-import QuantityCounter from "./QuantityCounter";
+import ProductActionsSection from "./ProductActionsSection";
 import DeliveryDetails from "./DeliveryDetails";
 import ProductBasicDetails from "./ProductBasicDetails";
+import { Product } from "@/types/product";
+
 function ProductInfo({
   name,
   price_after_discount,
@@ -18,7 +11,9 @@ function ProductInfo({
   NumberOfRatings,
   price,
   discount_percentage,
+  product,
 }: {
+  product: Product;
   name: string;
   price_after_discount: number;
   averageRating: number;
@@ -40,12 +35,8 @@ function ProductInfo({
       <Separator className="my-4" />
       {/* delivery details */}
       <DeliveryDetails />
-      {/* QuantityCOunter  */}
-      <QuantityCounter quantity={1} cartItemId={0} isProductPage={true} />
-      {/* offers section */}
-      <Offers />
-      {/* action buttons */}
-      <ActionButtons />
+      {/* Quantity Counter, Offers, and Action Buttons */}
+      <ProductActionsSection product={product} />
     </div>
   );
 }

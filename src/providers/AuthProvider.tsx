@@ -6,26 +6,17 @@ import { useAuthStore } from "@/stores/auth.store";
 import { User } from "@/types";
 import { BASE_API_URL } from "@/CONSTANTS";
 
-type Props = {
-  initialUser: User | null;
-};
-
-export default function AuthProvider({ initialUser }: Props) {
+export default function AuthProvider() {
   const setUser = useAuthStore((s) => s.setUser);
 
   useEffect(() => {
-    // If we have initial user from server, use it
-    if (initialUser) {
-      setUser(initialUser);
-      return;
-    }
-
-    // Otherwise fetch user client-side if authenticated
+    // Fetch user client-side if authenticated
     const fetchUser = async () => {
       try {
         const response = await fetch(`${BASE_API_URL}/user/profile`, {
           credentials: "include",
         });
+
         if (response.ok) {
           const user: User = await response.json();
           setUser(user);
@@ -37,7 +28,7 @@ export default function AuthProvider({ initialUser }: Props) {
     };
 
     fetchUser();
-  }, [initialUser, setUser]);
+  }, []);
 
   return null;
 }

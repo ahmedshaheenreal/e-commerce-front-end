@@ -6,8 +6,11 @@ import Link from "next/link";
 import { TableRow, TableCell } from "@/components/ui/table";
 import RemoveFromCartButton from "./RemoveFromCartButton";
 import { useCartState } from "@/stores/cart.store";
-import QuantityCounter from "../product/QuantityCounter";
+import { useWishList } from "@/stores/wishlist.sstore";
+import QuantityCounter from "./QuantityCounter";
+import { Product } from "@/types";
 function CartTableRows() {
+  const addToWishList = useWishList((s) => s.addToWishList);
   const cart = useCartState((s) => s.cart);
   return (
     <>
@@ -15,7 +18,7 @@ function CartTableRows() {
         <TableRow className="py-2" key={i}>
           <TableCell className="lg:max-w-50 truncate">
             <Link
-              className=" font-medium flex flex-col lg:flex-row gap-4 items-center justify-center min-w-fit max-w-full "
+              className=" font-medium flex flex-col lg:flex-row gap-4 items-center justify-start min-w-fit max-w-50 truncate "
               href={`/product/${item.product_id}`}
             >
               <Image
@@ -25,7 +28,7 @@ function CartTableRows() {
                 width={40}
                 className="object-cover rounded-sm h-12 w-12"
               />
-              {item.product.name + "456654654654654"}
+              {item.product.name}
             </Link>
           </TableCell>
           <TableCell>
@@ -41,6 +44,12 @@ function CartTableRows() {
 
             <Button
               variant={"link"}
+              onClick={() =>
+                addToWishList({
+                  product_id: item.product_id,
+                  ...item.product,
+                } as Product)
+              }
               className="text-primary underline cursor-pointer px-0"
             >
               Move to wishlist
@@ -48,7 +57,7 @@ function CartTableRows() {
           </TableCell>
           <TableCell className="text-right">
             {((item.product.price_after_discount || 1) * item.quantity).toFixed(
-              2
+              2,
             )}
             <RemoveFromCartButton id={item.cartItem_id} />
           </TableCell>

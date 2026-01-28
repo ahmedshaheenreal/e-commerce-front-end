@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
-import { Heart } from "lucide-react";
+import Image from "next/image";
 import StarRatingReadOnly from "./StarRatingReadOnly";
 import type { Product } from "@/types";
 import CardSkelaton from "./Skeletons/CardSkelaton";
@@ -15,19 +15,22 @@ function ProductCard({ product, isHomePage }: ProductCardComponentProps) {
   return (
     <Suspense fallback={<CardSkelaton />}>
       <Card className="border-none pt-0 hover:shadow-md transition-shadow duration-300 overflow-hidden">
-        <div>
+        <div className="relative h-50 w-full overflow-hidden">
           <Link href={`/product/${product.product_id}`}>
-            <img
+            <Image
               src={
                 product.product_image_url || "https://placehold.co/600x400/png"
               }
               alt="Product Photo"
-              className="object-cover h-50 mx-auto w-full"
+              className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+              width={600}
+              height={400}
+              loading="lazy"
             />
           </Link>
         </div>
         <CardContent>
-          <div className="flex justify-between items-center">
+          <div className="flex  justify-between items-center">
             <h2 className="text-base font-semibold">
               {product.name || "No name"}
             </h2>

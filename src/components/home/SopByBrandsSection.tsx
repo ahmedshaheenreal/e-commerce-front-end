@@ -1,9 +1,34 @@
+"use client";
+
 import Link from "next/link";
-async function ShopByBrandsSection() {
-  const response = await fetch("http://localhost:8000/api/brands", {
-    cache: "force-cache",
-  });
-  const brands = await response.json();
+import { useEffect, useState } from "react";
+import { BASE_API_URL } from "@/CONSTANTS";
+
+function ShopByBrandsSection() {
+  const [brands, setBrands] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const response = await fetch(`${BASE_API_URL}/brands`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setBrands(data || []);
+        }
+      } catch (error) {
+        console.log("Failed to fetch brands", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBrands();
+  }, []);
+
+  if (loading) return null;
+
   return (
     <section>
       <div className="global-container py-8">

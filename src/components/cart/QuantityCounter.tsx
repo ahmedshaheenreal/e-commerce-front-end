@@ -18,7 +18,7 @@ function QuantityCounter({
   return (
     <div className={`${!isProductPage && "scale-90"} `}>
       <div
-        className={`flex gap-4 quantity-counter items-center  justify-center ${
+        className={`flex gap-4 quantity-counter items-center ${!isProductPage && "justify-center "}  ${
           isProductPage && "my-6 "
         }`}
       >

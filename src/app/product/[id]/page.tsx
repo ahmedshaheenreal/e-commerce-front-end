@@ -18,8 +18,8 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
       {/* Product Images Section */}
       <ProductImages imageUrl={product.product_image_url || "/product.png"} />
       <div className="product-info col-span-6">
-        {}
         <ProductInfo
+          product={product}
           name={product.name}
           price_after_discount={product.price_after_discount}
           averageRating={product.averageRating}
@@ -39,5 +39,23 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
     </div>
   );
 }
-export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  try {
+    // Fetch popular/top products for static generation
+    const response = await fetch(`${BASE_API_URL}/newArrivals`, {
+      cache: "force-cache",
+    });
+    const { products } = await response.json();
+
+    return products.slice(0, 20).map((product: any) => ({
+      id: String(product.product_id),
+    }));
+  } catch (error) {
+    console.log("Failed to generate static params", error);
+    return [];
+  }
+}
+
+export const revalidate = 3600; // ISR: revalidate every hour
 export default page;

@@ -4,17 +4,22 @@ import HandPickedSection from "@/components/home/HandPickedSection";
 import ShopByBrandsSection from "@/components/home/SopByBrandsSection";
 import HandpickedListItems from "@/components/home/HandpickedListItems";
 import WomenSection from "@/components/home/WomenSection";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
     <>
       <main className="">
         <Hero />
+
         <NewArrivalsSection />
+
         <HandPickedSection>
           <HandpickedListItems />
         </HandPickedSection>
+
         <ShopByBrandsSection />
+
         <WomenSection />
       </main>
     </>

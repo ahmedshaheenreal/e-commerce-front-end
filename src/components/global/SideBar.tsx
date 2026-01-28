@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePrivateRouteState } from "@/stores/privatelayout.store";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 function SideBar() {
   const [ishidden, setIsHidden] = useState<boolean>(true);
@@ -26,7 +26,7 @@ function SideBar() {
   };
   return (
     <aside
-      className={`z-50 transition-all duration-300 absolute ${ishidden ? " -translate-x-full left-0" : "translate-x-0  left-0"} md:translate-x-0 md:static  bg-grey h-full w-50 py-4 rounded-sm`}
+      className={`z-50 transition-all duration-300 fixed ${ishidden ? " -translate-x-full left-0" : "translate-x-0  left-0"} md:translate-x-0 md:static  bg-grey h-full w-50 py-4 rounded-sm`}
     >
       <div className="relative">
         {

@@ -20,16 +20,15 @@ function WishListItemIdsHydrator({
           method: "GET",
         });
         const data: number[] = await res.json();
-        setItemIds(data);
-        if (!res.ok) {
-          throw data;
+        if (res.ok) {
+          setItemIds(data);
         }
       } catch (error: any) {
         console.log("ERROR FETCHING WIshlist Ids: ", JSON.stringify(error));
       }
     };
     getWishlistIds();
-  }, [initialWishlistIds, setItemIds]);
+  }, []);
   return null;
 }
 

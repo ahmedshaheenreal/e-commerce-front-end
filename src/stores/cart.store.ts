@@ -4,6 +4,7 @@ import { BASE_API_URL } from "@/CONSTANTS";
 import { produce } from "immer";
 import { toast } from "sonner";
 import { syncCartDebounced } from "@/lib/cart-sync";
+import type { CartItem } from "@/types";
 interface CartState {
   cart: CartItemsResponse;
   deleteFromCart: (cartItemId: number) => Promise<void>;
@@ -12,6 +13,7 @@ interface CartState {
   isLoading: boolean;
   error: Error | null;
   setCart: (cart: CartItemsResponse) => void;
+  addToCart: (productId: number, quantity: number) => void;
 }
 
 export const useCartState = create<CartState>()((set, get) => ({
@@ -24,8 +26,8 @@ export const useCartState = create<CartState>()((set, get) => ({
 
       set(
         produce((state: CartState) => {
-          const item = state.cart.cartItems.find(
-            (i) => i.cartItem_id === cartItemId
+          const item = (state.cart.cartItems || []).find(
+            (i) => i.cartItem_id === cartItemId,
           );
 
           if (item) {
@@ -35,7 +37,7 @@ export const useCartState = create<CartState>()((set, get) => ({
               .price_after_discount as number;
             state.cart.totalPriceBeforeDiscount += item.product.price as number;
           }
-        })
+        }),
       );
       syncCartDebounced({ newQuantity }, cartItemId);
     } catch (err) {
@@ -47,8 +49,8 @@ export const useCartState = create<CartState>()((set, get) => ({
       let newQuantity = 0;
       set(
         produce((state: CartState) => {
-          const item = state.cart.cartItems.find(
-            (i) => i.cartItem_id === cartItemId
+          const item = (state.cart.cartItems || []).find(
+            (i) => i.cartItem_id === cartItemId,
           );
 
           if (item && item.quantity > 0) {
@@ -59,7 +61,7 @@ export const useCartState = create<CartState>()((set, get) => ({
 
             state.cart.totalPriceBeforeDiscount -= item.product.price as number;
           }
-        })
+        }),
       );
 
       if (newQuantity >= 0) syncCartDebounced({ newQuantity }, cartItemId);
@@ -92,12 +94,40 @@ export const useCartState = create<CartState>()((set, get) => ({
       set(
         produce((state: CartState) => ({
           state: state.cart.cartItems.filter(
-            (item) => item.cartItem_id !== cartItemId
+            (item) => item.cartItem_id !== cartItemId,
           ),
-        }))
+        })),
       );
     } catch (error) {
       console.log(error);
+    }
+  },
+  addToCart: async (productId: number, quantity: number) => {
+    try {
+      const response = await fetch(`${BASE_API_URL}/cart`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ productId, quantity }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data: CartItem | { message: string } = await response.json();
+      if (response.ok) {
+        set((state) => ({
+          ...state,
+          cart: {
+            ...state.cart,
+            cartItems: [...(state.cart.cartItems || []), data as CartItem],
+          },
+        }));
+        toast.success("Item added to cart!");
+      }
+      if (!response.ok) {
+        throw new Error((data as any).message || "Failed to add item to cart");
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Error adding item to cart");
     }
   },
   setCart: (cart) => set({ cart }),
