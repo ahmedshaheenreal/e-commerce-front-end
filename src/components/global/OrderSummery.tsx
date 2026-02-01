@@ -53,9 +53,8 @@ function OrderSummery() {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                // body: JSON.stringify(orderData), // Include order data if needed
               });
-
+              console.log("Response received from server");
               const data = await res.json();
               if (data.url) {
                 window.location.href = data.url; // Redirect to the payment URL

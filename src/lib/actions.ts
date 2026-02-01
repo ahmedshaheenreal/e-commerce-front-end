@@ -44,7 +44,6 @@ export const getCart = async () => {
 };
 
 export const logout = async () => {
-  console.log("LOGGING OUT");
   const cookieStore = await cookies();
 
   await fetch(`${BASE_API_URL}/logout`, {
