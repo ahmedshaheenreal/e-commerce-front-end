@@ -4,21 +4,24 @@ import Link from "next/link";
 import { CarouselItem } from "../ui/carousel";
 import { Suspense } from "react";
 import CardSkelaton from "../global/Skeletons/CardSkelaton";
+import Image from "next/image";
 
-function HandpickedListItems() {
+async function HandpickedListItems() {
   return (
     <>
-      {" "}
       {categories.map(({ name, image, id }) => (
         <Suspense key={id + "category"} fallback={<CardSkelaton />}>
           <CarouselItem key={name + id} className="max-w-76 ">
             <Link href={`/category/handpicked/${id}`} title={name}>
               <Card className="relative  max-w-76 py-0 border-none hover:shadow-md transition-shadow duration-300 overflow-hidden">
                 <div>
-                  <img
+                  <Image
+                    loading="eager"
                     src={image}
                     alt={name}
                     className="object-cover w-full h-48"
+                    width={300}
+                    height={192}
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 w-full h-[50%] bg-linear-to-t from-[#03181A75]   to-[#c4c4c400]  rounded-lg bg-red"></div>

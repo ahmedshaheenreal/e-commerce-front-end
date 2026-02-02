@@ -10,8 +10,8 @@ async function page({ params, searchParams }: PageProps) {
   const { name } = await params;
   const { page } = await searchParams;
 
-  const path = `/category/${Number(name) || name.toLowerCase()}`;
-  const apiPath = `/products/${name}`;
+  const path = `/category/${name}`;
+  const apiPath = `/products/${name}?page=${Number(page) || 1}`;
   return (
     <>
       <div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BASE_API_URL } from "@/CONSTANTS";
+import Image from "next/image";
 
 function ShopByBrandsSection() {
   const [brands, setBrands] = useState<any[]>([]);
@@ -48,7 +49,9 @@ function ShopByBrandsSection() {
                 href={`/brand/${brand.brand_name.replace(/\s+/g, "-")}`}
                 className="w-full"
               >
-                <img
+                <Image
+                  width={96}
+                  height={96}
                   src={brand.brand_image_url}
                   alt={brand.brand_name}
                   className="w-full h-24 object-cover rounded-lg"

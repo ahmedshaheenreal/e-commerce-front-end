@@ -56,7 +56,7 @@ export default function SignupPage() {
 
       if (!response.ok) {
         setErrorMessage(
-          responseData.message || "Signup failed. Please try again.",
+          responseData.error?.message || "Signup failed. Please try again.",
         );
         return;
       }

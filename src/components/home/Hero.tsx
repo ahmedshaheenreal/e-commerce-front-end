@@ -1,12 +1,14 @@
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
-
+import Image from "next/image";
 function Hero() {
   return (
     <section>
       <div className="global-container relative rounded-2xl overflow-hidden min-h-30">
-        <img
-          src="./Home-hero.png"
+        <Image
+          width={1200}
+          height={400}
+          src="https://iili.io/fZ7sZCu.png"
           alt="Hero image"
           className=" min-h-30 w-full object-cover rounded-2xl max-h-100   top-0 left-5 "
         />
