@@ -1,15 +1,9 @@
 import ProductListTable from "@/components/cart/ProductListTable";
 import BreadCumber from "@/components/global/BreadCumber";
 import OrderSummery from "@/components/global/OrderSummery";
-import { getCurrentUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
+
 export const dynamic = "force-dynamic";
 async function page() {
-  const currentUser = await getCurrentUser();
-  console.log(currentUser);
-  if (!currentUser) {
-    redirect("/login");
-  }
   try {
     return (
       <div className="global-container">

@@ -16,7 +16,7 @@ function SideBar() {
   );
   useEffect(() => {
     setActiveRoute(activeRouteIndex);
-  }, []);
+  }, [path]);
   const handleClick = (index: number) => {
     setActiveRoute(index);
     setIsHidden(true);
