@@ -1,14 +1,16 @@
 "use client";
 
 import { BASE_API_URL } from "@/CONSTANTS";
+import { useAuthStore } from "@/stores/auth.store";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 async function page() {
   let data: any = [];
   const [orderData, setOrderData] = useState<any[]>([]);
+  const user = useAuthStore((state) => state.user);
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (user) fetchData();
+  }, [user]);
   const fetchData = async () => {
     try {
       const response = await fetch(`${BASE_API_URL}/orders`, {
