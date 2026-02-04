@@ -12,7 +12,7 @@ async function page() {
   }, [user]);
   const fetchData = async () => {
     try {
-      const response = await fetch(`${BASE_API_URL}/orders`, {
+      const response = await fetch(`${BASE_API_URL}/checkout-order-history`, {
         method: "GET",
         credentials: "include",
       });
