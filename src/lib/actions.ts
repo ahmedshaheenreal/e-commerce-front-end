@@ -2,8 +2,6 @@
 
 import { cookies } from "next/headers";
 import { BASE_API_URL } from "@/CONSTANTS";
-import { getCurrentUser } from "./auth";
-import { revalidatePath } from "next/cache";
 export async function addToWhislist({
   userId,
   productId,
@@ -46,14 +44,17 @@ export const getCart = async () => {
 export const logout = async () => {
   const cookieStore = await cookies();
 
-  await fetch(`${BASE_API_URL}/logout`, {
-    method: "DELETE",
-    headers: {
-      cookie: cookieStore.toString(),
-    },
-  });
+  try {
+    await fetch(`${BASE_API_URL}/logout`, {
+      method: "DELETE",
+      headers: {
+        cookie: cookieStore.toString(),
+      },
+    });
+  } catch (error) {
+    console.error("Logout API call failed:", error);
+  }
+
   cookieStore.delete("accessToken");
   cookieStore.delete("refreshToken");
-
-  revalidatePath("/");
 };

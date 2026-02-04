@@ -17,6 +17,7 @@ export default function DesktopNav() {
   ];
 
   const user = useAuthStore((s) => s.user);
+  const logoutState = useAuthStore((s) => s.logout);
 
   return (
     <div className="flex items-center justify-between  py-5.5 px-5 global-container w-full mb-4">
@@ -51,7 +52,12 @@ export default function DesktopNav() {
             <User className="text-primary" />
           </Link>
           {user && (
-            <form action={logout}>
+            <form
+              action={async () => {
+                await logout();
+                logoutState();
+              }}
+            >
               <Button type="submit">{"logout"}</Button>
             </form>
           )}

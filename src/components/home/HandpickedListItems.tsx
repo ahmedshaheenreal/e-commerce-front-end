@@ -7,6 +7,10 @@ import CardSkelaton from "../global/Skeletons/CardSkelaton";
 import Image from "next/image";
 
 async function HandpickedListItems() {
+  console.log("Rendering HandpickedListItems", process.env.NEXT_PUBLIC_API_URL);
+  console.log({
+    NODE_ENV: process.env.NODE_ENV,
+  });
   return (
     <>
       {categories.map(({ name, image, id }) => (
