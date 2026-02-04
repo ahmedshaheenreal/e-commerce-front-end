@@ -5,23 +5,41 @@ import Link from "next/link";
 import Image from "next/image";
 import AddressInfo from "@/components/global/AddressInfo";
 import { Card } from "@/components/ui/card";
-async function page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const response = await fetch(`${BASE_API_URL}/checkout-order-details/${id}`, {
-    method: "GET",
-    credentials: "include",
-  });
+import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
+function page() {
+  const { id } = useParams();
+  const [orderData, setOrderData] = useState<any[]>([]);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `${BASE_API_URL}/checkout-order-details/${id}`,
+        {
+          method: "GET",
+          credentials: "include",
+        },
+      );
 
-  console.log("Fetching order details for order ID:", id);
-  const data = await response.json();
+      console.log("Fetching order details for order ID:", id);
+      const data = await response.json();
+      setOrderData(data);
+    } catch (error) {
+      console.error("Error fetching order details:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
   let subtotal = 0;
   let grandTotal = 0;
-  for (const item of data) {
+  for (const item of orderData) {
     console.log("Processing item:", item);
     subtotal += item.OrderItems[0].subtotal;
     grandTotal += item.OrderItems[0].grandtotal;
   }
-  console.log("Order Details Data:", data);
+  console.log("Order Details Data:", orderData);
   return (
     <div>
       <div className="hidden md:grid grid-cols-12 gap-4 text-low-emphasis border-b border-b-grey pb-2 mb-4">
@@ -33,8 +51,8 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
 
       <ul className="hidden md:block max-h-100 overflow-y-scroll">
         {/* Render order items here */}
-        {data?.length > 0 ? (
-          data.map((item: any) => (
+        {orderData?.length > 0 ? (
+          orderData.map((item: any) => (
             <li
               key={item.product_id + item.brand_name + "orderItem"}
               className="grid grid-cols-12 gap-4 py-2 border-b border-b-grey font-medium"
@@ -65,8 +83,8 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
 
       <div>
         <ul className="md:hidden space-y-4">
-          {data?.length > 0 ? (
-            data.map((item: any) => (
+          {orderData?.length > 0 ? (
+            orderData.map((item: any) => (
               <li
                 key={item.product_id + item.brand_name + "orderItemMobile"}
                 className="border-b border-b-grey pb-4"
