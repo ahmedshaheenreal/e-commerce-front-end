@@ -6,14 +6,14 @@ import { useAuthStore } from "@/stores/auth.store";
 
 export default function AuthGuard() {
   const router = useRouter();
-  const { user, isAuthenticated, loading, fetchUser } = useAuthStore();
+  const { user, loading, fetchUser } = useAuthStore();
   useEffect(() => {
     if (!user) {
       fetchUser();
     }
   }, []);
   useEffect(() => {
-    if (!isAuthenticated && !user && !loading) {
+    if (!user && !loading) {
       router.replace("/login");
     }
   }, [user, loading]);
