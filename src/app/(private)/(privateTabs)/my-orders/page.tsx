@@ -1,15 +1,13 @@
+"use client";
+
 import { BASE_API_URL } from "@/CONSTANTS";
 import Link from "next/link";
-import { cookies } from "next/headers";
 async function page() {
   try {
-    const cookieStore = await cookies();
-
     const response = await fetch(`${BASE_API_URL}/checkout-order-history`, {
       method: "GET",
       credentials: "include",
       headers: {
-        cookie: cookieStore.toString(),
         "Content-Type": "application/json",
       },
     });

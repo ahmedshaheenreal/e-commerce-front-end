@@ -1,18 +1,15 @@
+"use client";
+
 import { BASE_API_URL } from "@/CONSTANTS";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import AddressInfo from "@/components/global/AddressInfo";
 import { Card } from "@/components/ui/card";
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const cookieStore = await cookies();
   const response = await fetch(`${BASE_API_URL}/checkout-order-details/${id}`, {
     method: "GET",
-    headers: {
-      cookie: cookieStore.toString(),
-      "Content-Type": "application/json",
-    },
+    credentials: "include",
   });
 
   console.log("Fetching order details for order ID:", id);
