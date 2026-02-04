@@ -10,6 +10,7 @@ export const getCurrentUser = async () => {
       headers: {
         Cookie: cookieStore.toString(),
       },
+      cache: "no-store",
     });
 
     const data = await response.json();
