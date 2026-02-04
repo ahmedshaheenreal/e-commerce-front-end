@@ -10,6 +10,7 @@ function SideBar() {
   const [ishidden, setIsHidden] = useState<boolean>(true);
   const itemsState = usePrivateRouteState((s) => s.privateRoutes);
   const setActiveRoute = usePrivateRouteState((s) => s.setActiveRoute);
+
   const path = usePathname();
   const activeRouteIndex = itemsState.findIndex((route) =>
     path.includes(route.path),
