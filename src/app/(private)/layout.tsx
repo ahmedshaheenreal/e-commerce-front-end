@@ -1,6 +1,5 @@
 // app/(protected)/layout.tsx
-import { getCurrentUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import AuthGuard from "@/providers/AuthGuard";
 export const dynamic = "force-dynamic";
 
 export default async function ProtectedLayout({
@@ -8,11 +7,10 @@ export default async function ProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getCurrentUser();
-  console.log("ProtectedLayout user:", user);
-  if (!user) {
-    redirect("/login");
-  }
-
-  return <>{children}</>;
+  return (
+    <>
+      <AuthGuard />
+      {children}
+    </>
+  );
 }
