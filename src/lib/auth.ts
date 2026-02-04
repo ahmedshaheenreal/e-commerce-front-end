@@ -1,10 +1,8 @@
 import { cookies } from "next/headers";
 import { BASE_API_URL } from "@/CONSTANTS";
-import { User } from "@/types";
 // lib/auth.ts
-import { cache } from "react";
 
-export const getCurrentUser = cache(async () => {
+export const getCurrentUser = async () => {
   try {
     const cookieStore = await cookies();
     const response = await fetch(`${BASE_API_URL}/user/profile`, {
@@ -22,4 +20,4 @@ export const getCurrentUser = cache(async () => {
   } catch (error) {
     console.log("ERROR getting user", JSON.stringify(error));
   }
-});
+};
