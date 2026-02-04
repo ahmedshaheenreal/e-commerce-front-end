@@ -5,7 +5,6 @@ import { useAuthStore } from "@/stores/auth.store";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 async function page() {
-  let data: any = [];
   const [orderData, setOrderData] = useState<any[]>([]);
   const user = useAuthStore((state) => state.user);
   useEffect(() => {
@@ -17,7 +16,7 @@ async function page() {
         method: "GET",
         credentials: "include",
       });
-      data = await response.json();
+      const data = await response.json();
       setOrderData(data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -34,7 +33,6 @@ async function page() {
           Order ID
         </span>
         <span className="basis-1/4 pr-2 md:pr-4 text-sm md:text-base">
-          {" "}
           Date{" "}
         </span>
         <span className="basis-1/4 pr-2 md:pr-4 text-sm md:text-base">
