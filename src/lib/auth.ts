@@ -1,3 +1,5 @@
+"use server";
+
 import { cookies } from "next/headers";
 import { BASE_API_URL } from "@/CONSTANTS";
 // lib/auth.ts
