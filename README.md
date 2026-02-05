@@ -356,9 +356,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or feedback, please reach out through:
 
-- **Email**: [your-email@example.com]
-- **GitHub Issues**: [Create an issue](https://github.com/yourusername/e-commerce/issues)
-- **LinkedIn**: [Your LinkedIn Profile]
+- **Email**: [ahmedshaheenwork@gmail.com]
+- **GitHub Issues**: [Create an issue](https://github.com/ahmedshaheenreal/e-commerce/issues)
+- **LinkedIn**: [Linkedin.com/in/real-ahmed-shaheen]
 
 ---
 
