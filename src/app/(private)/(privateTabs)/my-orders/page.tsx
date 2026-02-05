@@ -4,7 +4,7 @@ import { BASE_API_URL } from "@/CONSTANTS";
 import { useAuthStore } from "@/stores/auth.store";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
-async function page() {
+function page() {
   const [orderData, setOrderData] = useState<any[]>([]);
   const user = useAuthStore((state) => state.user);
   const loading = useAuthStore((state) => state.loading);
