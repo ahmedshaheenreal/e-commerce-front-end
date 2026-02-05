@@ -4,19 +4,27 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/auth.store";
 
-export default function AuthGuard() {
+export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { user, loading, fetchUser } = useAuthStore();
+  const { user, loading } = useAuthStore();
+
   useEffect(() => {
-    if (!user) {
-      fetchUser();
-    }
-  }, []);
-  useEffect(() => {
-    if (!user && !loading) {
+    if (!loading && !user) {
       router.replace("/login");
     }
-  }, [user, loading]);
+  }, [user, loading, router]);
 
-  return null;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  return <>{children}</>;
 }

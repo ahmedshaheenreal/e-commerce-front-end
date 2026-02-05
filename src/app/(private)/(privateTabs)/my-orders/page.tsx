@@ -3,14 +3,14 @@
 import { BASE_API_URL } from "@/CONSTANTS";
 import { useAuthStore } from "@/stores/auth.store";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 async function page() {
   const [orderData, setOrderData] = useState<any[]>([]);
   const user = useAuthStore((state) => state.user);
   const loading = useAuthStore((state) => state.loading);
   useEffect(() => {
-    if (user && !loading) fetchData();
-  }, [user, loading]);
+    fetchData();
+  }, []);
   const fetchData = async () => {
     try {
       const response = await fetch(`${BASE_API_URL}/checkout-order-history`, {

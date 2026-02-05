@@ -27,7 +27,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       user: null,
       isAuthenticated: false,
     }),
-  loading: false,
+  loading: true,
   fetchUser: async () => {
     set({ loading: true });
     try {
@@ -36,12 +36,12 @@ export const useAuthStore = create<AuthState>((set) => ({
       });
       if (res.ok) {
         const user: User = await res.json();
-        set({ user, loading: false });
+        set({ user, isAuthenticated: true, loading: false });
       } else {
-        set({ user: null, loading: false });
+        set({ user: null, isAuthenticated: false, loading: false });
       }
     } catch {
-      set({ user: null, loading: false });
+      set({ user: null, isAuthenticated: false, loading: false });
     }
   },
 }));

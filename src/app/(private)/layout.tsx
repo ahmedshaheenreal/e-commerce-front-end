@@ -8,9 +8,8 @@ export default async function ProtectedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <AuthGuard />
+    <AuthGuard>
       {children}
-    </>
+    </AuthGuard>
   );
 }
