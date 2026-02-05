@@ -69,8 +69,10 @@ export default function SignupPage() {
       setTimeout(() => {
         window.location.href = "/";
       }, 1500);
-    } catch (error) {
-      setErrorMessage("An error occurred. Please try again later.");
+    } catch (error: any) {
+      setErrorMessage(
+        error.message || "An error occurred. Please try again later.",
+      );
       console.error("Signup error:", error);
     } finally {
       setIsSubmitting(false);
