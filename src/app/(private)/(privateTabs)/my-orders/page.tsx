@@ -7,9 +7,10 @@ import { useEffect, useState } from "react";
 async function page() {
   const [orderData, setOrderData] = useState<any[]>([]);
   const user = useAuthStore((state) => state.user);
+  const loading = useAuthStore((state) => state.loading);
   useEffect(() => {
-    if (user) fetchData();
-  }, [user]);
+    if (user && !loading) fetchData();
+  }, [user, loading]);
   const fetchData = async () => {
     try {
       const response = await fetch(`${BASE_API_URL}/checkout-order-history`, {
