@@ -8,8 +8,10 @@ A modern, feature-rich e-commerce platform built with cutting-edge web technolog
 
 This is a full-featured e-commerce application designed to demonstrate professional development practices. The platform provides a complete shopping experience including product browsing, cart management, wishlist functionality, user authentication, and a robust checkout process.
 
-**Live Demo:** [Add your deployed URL here]  
-**Repository:** [Add your repository URL here]
+**Live Demo:** coaral.netlify.app  
+**Repository:** [(https://github.com/ahmedshaheenreal/e-commerce-front-end)]
+**Test Card:** 4242 4242 4242 4242
+**CCV & EXP date:** Add a future date and any 3 numbers for ccv
 
 ---
 
