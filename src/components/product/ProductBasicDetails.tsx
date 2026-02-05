@@ -40,7 +40,7 @@ function ProductBasicDetails({
           ${price}
         </s>
         <span className="text-red-600 text-xl font-medium">
-          {discount_percentage.toFixed(2)}% OFF
+          {discount_percentage?.toFixed(2)}% OFF
         </span>
       </div>
     </div>

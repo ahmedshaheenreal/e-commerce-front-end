@@ -3,14 +3,17 @@ import { Product } from "@/types";
 import ProductImages from "@/components/product/ProductImages";
 import ProductInfo from "@/components/product/ProductInfo";
 import RelatedInfoTabs from "@/components/product/RelatedInfoTabs";
-
+import { notFound } from "next/navigation";
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+
   const response = await fetch(`${BASE_API_URL}/product/${id}`, {
     cache: "force-cache",
   });
   const product: Product = await response.json();
-
+  if (!response.ok) {
+    notFound();
+  }
   const categoryName = product?.categories?.[0]?.name;
   console.log("The Product", JSON.stringify(product));
   return (

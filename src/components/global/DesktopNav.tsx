@@ -23,8 +23,11 @@ export default function DesktopNav() {
     <div className="flex items-center justify-between  py-5.5 px-5 global-container w-full mb-4">
       <div className="flex gap-5 items-center">
         <div className="logo w-28">
-          <Link href={"/"}>
-            <img src="/logo.png" className="w-28" alt="Logo" />
+          <Link
+            href={"/"}
+            className="text-2xl font-bold text-primary flex items-center gap-2"
+          >
+            CORA'L
           </Link>
         </div>
 

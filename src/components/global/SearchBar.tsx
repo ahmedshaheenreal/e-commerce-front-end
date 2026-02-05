@@ -4,19 +4,31 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-export default function SearchBar() {
+interface SearchBarProps {
+  setIsMenuOpen?: (isOpen: boolean) => void;
+}
+
+export default function SearchBar({ setIsMenuOpen }: SearchBarProps) {
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push(`/search/${query}`);
-  };
   const [query, setQuery] = useState("");
+
+  const handleSubmit = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!query.trim()) return;
+
+    setIsMenuOpen?.(false);
+    router.push(`/search/${query.trim()}`);
+  };
+
   return (
     <div className="relative w-full grow">
-      <Search
-        size={18}
-        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 border-transparent outline-none text-gray-500  "
-      />
+      <button
+        type="button"
+        onClick={() => handleSubmit()}
+        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary transition-colors"
+      >
+        <Search size={18} />
+      </button>
 
       <form onSubmit={handleSubmit}>
         <Input

@@ -49,7 +49,7 @@ function PaginationComponent({
         <PaginationPrevious
           className="cursor-pointer  bg-grey "
           onClick={(e) => {
-            if (Number(currPage) >= number_of_pages) {
+            if (Number(currPage) <= 1) {
               e.preventDefault();
               return;
             }
