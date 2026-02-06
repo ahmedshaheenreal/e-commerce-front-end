@@ -48,8 +48,8 @@ function AddToWishlistButton({ product }: { product: Product }) {
             return;
           }
           isLiked
-            ? () => deleteFromWishList(product.product_id)
-            : () => addToWishList(product);
+            ? deleteFromWishList(product.product_id)
+            : addToWishList(product);
         }}
         variant={"ghost"}
         className="hover:cursor-pointer rounded-full"

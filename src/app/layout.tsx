@@ -6,6 +6,7 @@ import Footer from "@/components/global/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import AuthProvider from "@/providers/AuthProvider";
 import WishListItemIdsHydrator from "@/providers/WishListItemIdsHydrator";
+import CartHydrator from "@/providers/CartProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,11 +29,12 @@ export default function RootLayout({
         className={`${inter.variable} antialiased flex flex-col min-h-screen`}
       >
         <AuthProvider />
-        <NavBar />
-        <main className="grow">
-          <>{children}</>
-        </main>
-        <Footer />
+        <CartHydrator initialCart={null}>
+          <NavBar />
+          <main className="grow">{children}</main>
+
+          <Footer />
+        </CartHydrator>
         <Toaster />
         {/* Load wishlist after critical content */}
         <WishListItemIdsHydrator initialWishlistIds={null} />

@@ -6,10 +6,11 @@ import { CartItemsResponse } from "@/types";
 import { BASE_API_URL } from "@/CONSTANTS";
 
 type Props = {
-  initialCart: CartItemsResponse | null;
+  children: React.ReactNode;
+  initialCart: CartItemsResponse | null; // Accept initial cart data as a prop
 };
 
-export default function CartHydrator({ initialCart }: Props) {
+export default function CartHydrator({ initialCart, children }: Props) {
   const setCart = useCartState((s) => s.setCart);
 
   useEffect(() => {
@@ -38,5 +39,5 @@ export default function CartHydrator({ initialCart }: Props) {
     fetchCart();
   }, []); // Empty deps - only run once on mount
 
-  return null;
+  return <>{children}</>;
 }

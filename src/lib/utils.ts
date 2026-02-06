@@ -14,3 +14,11 @@ export const pleaseLoginToast = (router: { push: (path: string) => void }) => {
     },
   });
 };
+export const addToCartToast = (message?: string) => {
+  toast.success(message || "Item added to cart!", {
+    action: {
+      label: "View Cart",
+      onClick: () => (window.location.href = "/cart"),
+    },
+  });
+};

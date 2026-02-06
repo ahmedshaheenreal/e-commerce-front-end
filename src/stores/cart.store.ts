@@ -5,6 +5,7 @@ import { produce } from "immer";
 import { toast } from "sonner";
 import { syncCartDebounced } from "@/lib/cart-sync";
 import type { CartItem } from "@/types";
+import { addToCartToast } from "@/lib/utils";
 interface CartState {
   cart: CartItemsResponse;
   deleteFromCart: (cartItemId: number) => Promise<void>;
@@ -17,7 +18,11 @@ interface CartState {
 }
 
 export const useCartState = create<CartState>()((set, get) => ({
-  cart: {} as CartItemsResponse,
+  cart: {
+    cartItems: [],
+    totalPriceBeforeDiscount: 0,
+    totalPriceAfterDiscount: 0,
+  } as CartItemsResponse,
   isLoading: false,
   error: null,
   incrementItem: (cartItemId: number) => {
@@ -104,6 +109,25 @@ export const useCartState = create<CartState>()((set, get) => ({
   },
   addToCart: async (productId: number, quantity: number) => {
     try {
+      console.log("CART: ", JSON.stringify(get().cart));
+      const existingItem = get().cart.cartItems?.find(
+        (item) => item.product_id === productId,
+      );
+
+      // cart.cartItems?.find(
+      //   (item) => item.product.product_id === productId,
+      // );
+      console.log("EXISTING CART ITEM:", existingItem);
+      if (existingItem) {
+        const incremnt = get().incrementItem;
+        incremnt(existingItem.cartItem_id);
+        console.log(
+          "INCREMENTED CART ITEM QUANTITY FOR PRODUCT ID:",
+          productId,
+        );
+        addToCartToast("Item quantity updated in cart!");
+        return;
+      }
       const response = await fetch(`${BASE_API_URL}/cart`, {
         method: "POST",
         credentials: "include",
@@ -121,7 +145,7 @@ export const useCartState = create<CartState>()((set, get) => ({
             cartItems: [...(state.cart.cartItems || []), data as CartItem],
           },
         }));
-        toast.success("Item added to cart!");
+        addToCartToast("Item added to cart!");
       }
       if (!response.ok) {
         throw new Error((data as any).message || "Failed to add item to cart");
