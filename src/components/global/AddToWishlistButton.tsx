@@ -3,18 +3,21 @@
 
 import { Heart, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
-
+import { pleaseLoginToast } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Product } from "@/types";
 import { useWishList } from "@/stores/wishlist.sstore";
+import { useAuthStore } from "@/stores/auth.store";
+import { useRouter } from "next/navigation";
 function AddToWishlistButton({ product }: { product: Product }) {
+  const router = useRouter();
   const wishListItemIds: number[] = useWishList((s) => s.wishListItemIds);
 
   const isLiked = !!(
     Array.isArray(wishListItemIds) &&
     wishListItemIds.find((id) => id === product.product_id)
   );
-
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const addToWishList = useWishList((s) => s.addToWishList);
   const deleteFromWishList = useWishList((s) => s.deleteItem);
   console.log("WISHLIST IDS IN BUTTON:", wishListItemIds);
@@ -39,11 +42,15 @@ function AddToWishlistButton({ product }: { product: Product }) {
     <div>
       <Button
         size={"icon-sm"}
-        onClick={
+        onClick={() => {
+          if (!isAuthenticated) {
+            pleaseLoginToast(router);
+            return;
+          }
           isLiked
             ? () => deleteFromWishList(product.product_id)
-            : () => addToWishList(product)
-        }
+            : () => addToWishList(product);
+        }}
         variant={"ghost"}
         className="hover:cursor-pointer rounded-full"
       >
