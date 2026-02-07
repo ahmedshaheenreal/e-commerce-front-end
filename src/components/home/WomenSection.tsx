@@ -25,7 +25,7 @@ function WomenSection() {
             </div>
           </div>
         </div>
-        <div className="col-span-6 ">
+        <div className="col-span-12 md:col-span-6 ">
           <div className="relative">
             <Image
               width={600}
@@ -42,14 +42,14 @@ function WomenSection() {
           </div>
         </div>
 
-        <div className="col-span-6   ">
+        <div className="col-span-12 md:col-span-6 ">
           <div className="relative overflow-hidden">
             <Image
               width={600}
               height={200}
               src="https://iili.io/fZa0icQ.png"
               alt="Accessories for women "
-              className="w-full h-22     md:h-100 object-cover rounded-lg"
+              className="w-full md:h-100 object-cover rounded-lg"
             />
             <div className="absolute top-1/2 -translate-y-1/2 right-0 md:right-2 bg-opacity-75 px-3 py-1 rounded">
               <h3 className="text-lg font-bold text-[#A53F64] md:text-4xl">

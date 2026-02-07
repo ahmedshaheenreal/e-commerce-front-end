@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 function Hero() {
   return (
     <section>
@@ -21,9 +22,10 @@ function Hero() {
             Trendy handbags collection for your
             <br className="hidden md:block" /> party animal
           </p>
-          <Button size={"lg"} className="hidden md:flex">
-            <ArrowRight className="size-4" /> Shop Now
-          </Button>
+          <Link href={"/newarrivals"}>
+            <Button size={"lg"} className="hidden md:flex">
+              <ArrowRight className="size-4" /> Shop Now
+            </Button></Link>
         </div>
       </div>
     </section>
