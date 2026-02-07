@@ -15,7 +15,7 @@ function WishList() {
   return (
     <>
       {wishListItems?.products?.length ? (
-        <main className=" grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-6 mt-8">
+        <main className=" grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-6 mt-8 max-w-[1050px]">
           <WishListItems wishlistItems={wishListItems} />
         </main>
       ) : (

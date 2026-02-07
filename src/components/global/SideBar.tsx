@@ -27,7 +27,7 @@ function SideBar() {
   };
   return (
     <aside
-      className={`z-50 transition-all duration-300 fixed ${ishidden ? " -translate-x-full left-0" : "translate-x-0  left-0"} md:translate-x-0 md:static  bg-grey h-full w-50 py-4 rounded-sm`}
+      className={`z-50 transition-all duration-300 fixed ${ishidden ? " -translate-x-full left-0" : "translate-x-0  left-0"} md:translate-x-0 md:static  bg-grey h-full min-w-50  w-50 py-4 rounded-sm`}
     >
       <div className="relative">
         {
