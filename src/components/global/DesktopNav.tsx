@@ -55,16 +55,24 @@ export default function DesktopNav() {
             <User className="text-primary" />
           </Link>
           {user && (
-            <form
-              action={async () => {
+            <Button
+              type="button"
+              className={user && "bg-error cursor-pointer"}
+              onClick={async () => {
                 await logout();
                 logoutState();
               }}
             >
-              <Button type="submit">{"logout"}</Button>
-            </form>
+              {"logout"}
+            </Button>
           )}
-          {!user && <Link href={"/login"}>{"login"}</Link>}
+          {!user && (
+            <Link href={"/login"}>
+              <Button type="button" className="cursor-pointer">
+                {"Login"}
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ type AuthState = {
   fetchUser: () => Promise<void>;
 };
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   isAuthenticated: false,
 
@@ -22,11 +22,30 @@ export const useAuthStore = create<AuthState>((set) => ({
       isAuthenticated: !!user,
     }),
 
-  logout: () =>
+  logout: async () => {
+    try {
+      const res = await fetch(`${BASE_API_URL}/logout`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      set((s) => ({ loading: true }));
+
+      if (res.ok) {
+        set({
+          user: null,
+          isAuthenticated: false,
+        });
+      }
+    } catch (error) {
+    } finally {
+      set((s) => ({ loading: false }));
+    }
     set({
       user: null,
       isAuthenticated: false,
-    }),
+    });
+  },
+
   loading: true,
   fetchUser: async () => {
     set({ loading: true });
